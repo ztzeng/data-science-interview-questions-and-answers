@@ -231,7 +231,6 @@ One way of resolving the trade-off is to use [mixture models](https://en.wikiped
 [Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
 
 ## 10. What if the classes are imbalanced? What if there are more than 2 groups?
-Binary classification involves classifying the data into two groups, e.g. whether or not a customer buys a particular product or not (Yes/No), based on independent variables such as gender, age, location etc.
 
 As the target variable is not continuous, binary classification model predicts the probability of a target variable to be Yes/No. To evaluate such a model, a metric called the confusion matrix is used, also called the classification or co-incidence matrix. With the help of a confusion matrix, we can calculate important performance measures:
 * True Positive Rate (TPR) or Recall or Sensitivity = TP / (TP + FN)
@@ -319,7 +318,8 @@ One option is to try a transformation. Square root and log transformations both 
 
 ## 18. How do you deal with sparse data?
 
-We could take a look at L1 regularization since it best fits to the sparse data and do feature selection. If linear relationship - linear regression either - svm. 
+We could take a look at L1 regularization since it best fits to the sparse data and do 
+selection. If linear relationship - linear regression either - svm. 
 
 Also it would be nice to use one-hot-encoding or bag-of-words. A one hot encoding is a representation of categorical variables as binary vectors. This first requires that the categorical values be mapped to integer values. Then, each integer value is represented as a binary vector that is all zero values except the index of the integer, which is marked with a 1.
 
