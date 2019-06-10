@@ -12,7 +12,7 @@
 - [8. What is statistical power?](#8-what-is-statistical-power)
 - [9. What are bias and variance, and what are their relation to modeling data?](#9-what-are-bias-and-variance--and-what-are-their-relation-to-modeling-data)
     - [Approaches](#approaches)
-- [10. What if the classes are imbalanced? What if there are more than 2 groups?](#10-what-if-the-classes-are-imbalanced-what-if-there-are-more-than-2-groups)
+- [10. How to deal with missing data?](#10-How-to-deal-with-missing-data)
 - [11. What are some ways I can make my model more robust to outliers?](#11-what-are-some-ways-i-can-make-my-model-more-robust-to-outliers)
 - [12. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?](#12-in-unsupervised-learning--if-a-ground-truth-about-a-dataset-is-unknown--how-can-we-determine-the-most-useful-number-of-clusters-to-be)
 - [13. Define variance](#13-define-variance)
@@ -40,7 +40,6 @@
 - [24. Разница между adaboost и XGBoost](#24-Разница-между-adaboost-и-xgboost)
 - [25. Data Mining Describe the decision tree model.](#25-data-mining-describe-the-decision-tree-model)
 - [26. Notes from Coursera Deep Learning courses by Andrew Ng](#26-notes-from-coursera-deep-learning-courses-by-andrew-ng)
-- [27. How to deal with missing data](#27-How-to-deal-with-missing-data)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -103,33 +102,32 @@ See also a very good explanation of [Precision and recall](https://en.wikipedia.
 
 ![alt text](images/precision-recall.jpg)
 
-ROC curve represents a relation between sensitivity (RECALL) and specificity(NOT PRECISION) and is commonly used to measure the performance of binary classifiers. However, when dealing with highly skewed datasets, [Precision-Recall (PR)](http://pages.cs.wisc.edu/~jdavis/davisgoadrichcamera2.pdf) curves give a more representative picture of performance. Remember, a ROC curve represents a relation between sensitivity (RECALL) and specificity(NOT PRECISION). Sensitivity is the other name for recall but specificity is not PRECISION.
+ROC curve represents a relation between TPR (True positive rate, aka Sensitivity)/ TNR (True negative rate, aka Specificity) and is commonly used to measure the performance of binary classifiers. However, when dealing with highly skewed datasets, [Precision-Recall (PR)](http://pages.cs.wisc.edu/~jdavis/davisgoadrichcamera2.pdf) curves give a more representative picture of performance.
 
-Recall/Sensitivity is the measure of the probability that your estimate is 1 given all the samples whose true class label is 1. It is a measure of how many of the positive samples have been identified as being positive. Specificity is the measure of the probability that your estimate is 0 given all the samples whose true class label is 0. It is a measure of how many of the negative samples have been identified as being negative.
 
-PRECISION on the other hand is different. It is a measure of the probability that a sample is a true positive class given that your classifier said it is positive. It is a measure of how many of the samples predicted by the classifier as positive is indeed positive. Note here that this changes when the base probability or prior probability of the positive class changes. Which means PRECISION depends on how rare is the positive class. In other words, it is used when positive class is more interesting than the negative class.
-
-* Sensitivity also known as the True Positive rate or Recall is calculated as,
+* Sensitivity is calculated as,
 `Sensitivity = TP / (TP + FN)`. Since the formula doesn’t contain FP and TN, Sensitivity may give you a biased result, especially for imbalanced classes.
 In the example of Fraud detection, it gives you the percentage of Correctly Predicted Frauds from the pool of Actual Frauds pool of Actual Non-Frauds.
-* Specificity, also known as True Negative Rate is calculated as, `Specificity = TN / (TN + FP)`. Since the formula does not contain FN and TP, Specificity may give you a biased result, especially for imbalanced classes.
+* Specificity, is calculated as, 
+`Specificity = TN / (TN + FP)`. Since the formula does not contain FN and TP, Specificity may give you a biased result, especially for imbalanced classes.
 In the example of Fraud detection, it gives you the percentage of Correctly Predicted Non-Frauds from the pool of Actual Frauds pool of Actual Non-Frauds
+
+ROC curve is independent from threshold and irrelavent to class-size. When threshold changes from 1 to 0, it moves along the ROC curve from left-bottom to right-top. Since we need a number to compare between different ROC, we use AUC to do it.
+
+* AUC is equal to the probability that the classifier will rank a randomly chosen positive example higher than a randomly chosen negative example
 
 [Assessing and Comparing Classifier Performance with ROC Curves](https://machinelearningmastery.com/assessing-comparing-classifier-performance-roc-curves-2/)
 
 ## 6. Is it better to have too many false positives, or too many false negatives?
 It depends on the question as well as on the domain for which we are trying to solve the question.
 
-In medical testing, false negatives may provide a falsely reassuring message to patients and physicians that disease is absent, when it is actually present. This sometimes leads to inappropriate or inadequate treatment of both the patient and their disease. So, it is desired to have too many false positive.
+In medical testing, false negatives may provide a falsely reassuring message to patients and physicians that disease is absent, when it is actually present. This sometimes leads to inappropriate or inadequate treatment. So, it is desired to have too many false positive.
 
-For spam filtering, a false positive occurs when spam filtering or spam blocking techniques wrongly classify a legitimate email message as spam and, as a result, interferes with its delivery. While most anti-spam tactics can block or filter a high percentage of unwanted emails, doing so without creating significant false-positive results is a much more demanding task. So, we prefer too many false negatives over many false positives.
+For spam filtering, a false positive occurs when spam filtering or spam blocking techniques wrongly classify a legitimate email message as spam. While most anti-spam tactics can block or filter a high percentage of unwanted emails, doing so without creating significant false-positive results is a much more demanding task. So, we prefer too many false negatives over many false positives.
 
 ## 7. How do you deal with unbalanced binary classification?
 Imbalanced data typically refers to a problem with classification problems where the classes are not represented equally.
-For example, you may have a 2-class (binary) classification problem with 100 instances (rows). A total of 80 instances are labeled with Class-1 and the remaining 20 instances are labeled with Class-2.
 
-This is an imbalanced dataset and the ratio of Class-1 to Class-2 instances is 80:20 or more concisely 4:1.
-You can have a class imbalance problem on two-class classification problems as well as multi-class classification problems. Most techniques can be used on either.
 The remaining discussions will assume a two-class classification problem because it is easier to think about and describe.
 1. Can You Collect More Data?</br>
 A larger dataset might expose a different and perhaps more balanced perspective on the classes.
@@ -143,36 +141,30 @@ From that post, I recommend looking at the following performance measures that c
   - [F1 Score (or F-score)](https://en.wikipedia.org/wiki/F1_score): A weighted average of precision and recall.
 I would also advise you to take a look at the following:
   - Kappa (or [Cohen’s kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa)): Classification accuracy normalized by the imbalance of the classes in the data.
-ROC Curves: Like precision and recall, accuracy is divided into sensitivity and specificity and models can be chosen based on the balance thresholds of these values.
-3. Try Resampling Your Dataset
+  - ROC Curves: Like precision and recall, accuracy is divided into sensitivity and specificity and models can be chosen based on the balance thresholds of these values.
+3. Try Resampling Your Dataset, like using SMOTE</br>
   * You can add copies of instances from the under-represented class called over-sampling (or more formally sampling with replacement)
   * You can delete instances from the over-represented class, called under-sampling.
-5. Try Different Algorithms
-6. Try Penalized Models</br>
+4. Try Different Algorithms, like SVM, tree-based models</br>
+5. Try Penalized Models</br>
 You can use the same algorithms but give them a different perspective on the problem.
 Penalized classification imposes an additional cost on the model for making classification mistakes on the minority class during training. These penalties can bias the model to pay more attention to the minority class.
 Often the handling of class penalties or weights are specialized to the learning algorithm. There are penalized versions of algorithms such as penalized-SVM and penalized-LDA.
 Using penalization is desirable if you are locked into a specific algorithm and are unable to resample or you’re getting poor results. It provides yet another way to “balance” the classes. Setting up the penalty matrix can be complex. You will very likely have to try a variety of penalty schemes and see what works best for your problem.
-7. Try a Different Perspective</br>
-Taking a look and thinking about your problem from these perspectives can sometimes shame loose some ideas.
-Two you might like to consider are anomaly detection and change detection.
+6. Try a Different Perspective, like anomaly detection and change detection</br>
 
 ## 8. What is statistical power?
 [Statistical power or sensitivity](https://en.wikipedia.org/wiki/Statistical_power) of a binary hypothesis test is the probability that the test correctly rejects the null hypothesis (H0) when the alternative hypothesis (H1) is true.
 
-It can be equivalently thought of as the probability of accepting the alternative hypothesis (H1) when it is true—that is, the ability of a test to detect an effect, if the effect actually exists.
-
 To put in another way, [Statistical power](https://effectsizefaq.com/2010/05/31/what-is-statistical-power/) is the likelihood that a study will detect an effect when the effect is present. The higher the statistical power, the less likely you are to make a Type II error (concluding there is no effect when, in fact, there is).
 
-A type I error (or error of the first kind) is the incorrect rejection of a true null hypothesis. Usually a type I error leads one to conclude that a supposed effect or relationship exists when in fact it doesn't. Examples of type I errors include a test that shows a patient to have a disease when in fact the patient does not have the disease, a fire alarm going on indicating a fire when in fact there is no fire, or an experiment indicating that a medical treatment should cure a disease when in fact it does not.
-
-A type II error (or error of the second kind) is the failure to reject a false null hypothesis. Examples of type II errors would be a blood test failing to detect the disease it was designed to detect, in a patient who really has the disease; a fire breaking out and the fire alarm does not ring; or a clinical trial of a medical treatment failing to show that the treatment works when really it does.
-![alt text](images/statistical-power.png)
+Review: power-calculation for A/B testing.
 
 ## 9. What are bias and variance, and what are their relation to modeling data?
-**Bias** is how far removed a model's predictions are from correctness, while variance is the degree to which these predictions vary between model iterations.
+**Bias** is how far removed a model's predictions are from correctness.
+**variance** is the degree to which these predictions vary between model iterations.
 
-Bias - это, условно говоря, расстояние между моделью которую ты можешь зафитить на бесконечных тренировочных данных (наилучшей моделью, которую может предоставить твоё пространство моделей) и "настоящей моделью" (которая генерирует данные).
+![alt text](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjDh7HI29_iAhUSsJ4KHcrUAigQjRx6BAgBEAQ&url=http%3A%2F%2Fwww.ugba198.com%2Ffiles%2Fnotes%2Fn4.pdf&psig=AOvVaw1JJ2NaabwwacBw3_XxFBSK&ust=1560283611011780)
 
 **Error due to Bias**: Due to randomness in the underlying data sets, the resulting models will have a range of predictions. [Bias](https://en.wikipedia.org/wiki/Bias_of_an_estimator) measures how far off in general these models' predictions are from the correct value. The bias is error from erroneous assumptions in the learning algorithm. High bias can cause an algorithm to miss the relevant relations between features and target outputs (underfitting).
 
@@ -181,7 +173,7 @@ Bias - это, условно говоря, расстояние между мо
 High variance can cause an algorithm to model the random [noise](https://en.wikipedia.org/wiki/Noise_(signal_processing)) in the training data, rather than the intended outputs (overfitting).
 
 Big dataset -> low variance <br/>
-Low dataset -> high variance <br/>
+Small dataset -> high variance <br/>
 Few features -> high bias, low variance <br/>
 Many features -> low bias, high variance <br/>
 Complicated model -> low bias <br/>
@@ -194,29 +186,12 @@ We can create a graphical visualization of bias and variance using a bulls-eye d
 
 [As an example](https://www.kdnuggets.com/2016/08/bias-variance-tradeoff-overview.html), using a simple flawed Presidential election survey as an example, errors in the survey are then explained through the twin lenses of bias and variance: selecting survey participants from a phonebook is a source of bias; a small sample size is a source of variance.
 
-Minimizing total model error relies on the balancing of bias and variance errors. Ideally, models are the result of a collection of unbiased data of low variance. Unfortunately, however, the more complex a model becomes, its tendency is toward less bias but greater variance; therefore an optimal model would need to consider a balance between these 2 properties.
-
 The statistical evaluation method of cross-validation is useful in both demonstrating the importance of this balance, as well as actually searching it out. The number of data folds to use -- the value of k in k-fold cross-validation -- is an important decision; the lower the value, the higher the bias in the error estimates and the less variance.
 ![alt text](images/model-complexity.jpg)
 
 The most important takeaways are that bias and variance are two sides of an important trade-off when building models, and that even the most routine of statistical evaluation methods are directly reliant upon such a trade-off.
 
-We may estimate a model f̂ (X) of f(X) using linear regressions or another modeling technique. In this case, the expected squared prediction error at a point x is:
-`Err(x)=E[(Y−f̂ (x))^2]`
-
-This error may then be decomposed into bias and variance components:
-`Err(x)=(E[f̂ (x)]−f(x))^2+E[(f̂ (x)−E[f̂ (x)])^2]+σ^2e`
-`Err(x)=Bias^2+Variance+Irreducible`
-
-That third term, irreducible error, is the noise term in the true relationship that cannot fundamentally be reduced by any model. Given the true model and infinite data to calibrate it, we should be able to reduce both the bias and variance terms to 0. However, in a world with imperfect models and finite data, there is a tradeoff between minimizing the bias and minimizing the variance.
-
-That third term, irreducible error, is the noise term in the true relationship that cannot fundamentally be reduced by any model. Given the true model and infinite data to calibrate it, we should be able to reduce both the bias and variance terms to 0. However, in a world with imperfect models and finite data, there is a tradeoff between minimizing the bias and minimizing the variance.
-
-If a model is suffering from high bias, it means that model is less complex, to make the model more robust, we can add more features in feature space. Adding data points will reduce the variance.
-
-The bias–variance tradeoff is a central problem in supervised learning. Ideally, one wants to [choose a model](https://en.wikipedia.org/wiki/Model_selection) that both accurately captures the regularities in its training data, but also generalizes well to unseen data. Unfortunately, it is typically impossible to do both simultaneously. High-variance learning methods may be able to represent their training set well, but are at risk of overfitting to noisy or unrepresentative training data. In contrast, algorithms with high bias typically produce simpler models that don't tend to overfit, but may underfit their training data, failing to capture important regularities.
-
-Models with low bias are usually more complex (e.g. higher-order regression polynomials), enabling them to represent the training set more accurately. In the process, however, they may also represent a large noise component in the training set, making their predictions less accurate - despite their added complexity. In contrast, models with higher bias tend to be relatively simple (low-order or even linear regression polynomials), but may produce lower variance predictions when applied beyond the training set.
+If a model is suffering from high bias, it means that model is too simple, to make the model more robust, we can add more features in feature space. Adding data points will reduce the variance.
 
 #### Approaches
 
@@ -224,24 +199,24 @@ Models with low bias are usually more complex (e.g. higher-order regression poly
 * (Generalized) linear models can be [regularized](#2-explain-what-regularization-is-and-why-it-is-useful) to decrease their variance at the cost of increasing their bias.
 * In artificial neural networks, the variance increases and the bias decreases with the number of hidden units. Like in GLMs, regularization is typically applied.
 * In k-nearest neighbor models, a high value of k leads to high bias and low variance (see below).
-* In Instance-based learning, regularization can be achieved varying the mixture of prototypes and exemplars.[
 * In decision trees, the depth of the tree determines the variance. Decision trees are commonly pruned to control variance.
 
 One way of resolving the trade-off is to use [mixture models](https://en.wikipedia.org/wiki/Mixture_model) and [ensemble learning](https://en.wikipedia.org/wiki/Ensemble_learning). For example, [boosting](https://en.wikipedia.org/wiki/Boosting_(machine_learning)) combines many "weak" (high bias) models in an ensemble that has lower bias than the individual models, while [bagging](https://en.wikipedia.org/wiki/Bootstrap_aggregating) combines "strong" learners in a way that reduces their variance.
 
-[Understanding the Bias-Variance Tradeoff](http://scott.fortmann-roe.com/docs/BiasVariance.html)
+## 10. How to deal with missing data?
+https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779
 
-## 10. What if the classes are imbalanced? What if there are more than 2 groups?
+1. Urgency. If not, can we dig deeper to figure out why missing?
 
-As the target variable is not continuous, binary classification model predicts the probability of a target variable to be Yes/No. To evaluate such a model, a metric called the confusion matrix is used, also called the classification or co-incidence matrix. With the help of a confusion matrix, we can calculate important performance measures:
-* True Positive Rate (TPR) or Recall or Sensitivity = TP / (TP + FN)
-* [Precision](https://github.com/iamtodor/data-science-interview-questions-and-answers#5-explain-what-precision-and-recall-are-how-do-they-relate-to-the-roc-curve) = TP / (TP + FP)
-* False Positive Rate(FPR) or False Alarm Rate = 1 - Specificity = 1 - (TN / (TN + FP))
-* Accuracy = (TP + TN) / (TP + TN + FP + FN)
-* Error Rate = 1 – Accuracy
-* F-measure = 2 / ((1 / Precision) + (1 / Recall)) = 2 * (precision * recall) / (precision + recall)
-* ROC (Receiver Operating Characteristics) = plot of FPR vs TPR
-* AUC (Area Under the Curve)
+2. Importance. Is this feature important to our prediciton. If not,leave it as "Not Found".
+
+3. What algorithm. If tree-based, we don't need to imputate.
+
+When we do need to imputate data:
+1) Mean/Median
+2) Zero/Constanct
+3) Modeling: KNN, MICE (Multivariate Imputation by Chained Equation), Deep_learning
+4) Time series specific: last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
 
 ## 11. What are some ways I can make my model more robust to outliers?
 There are several ways to make a model more robust to outliers, from different points of view (data preparation or model building). An outlier in the question and answer is assumed being unwanted, unexpected, or a must-be-wrong value to the human’s knowledge so far (e.g. no one is 200 years old) rather than a rare event which is possible but rare.
@@ -556,18 +531,3 @@ The cost complexity is measured by the following two parameters − Number of le
 ## 26. Notes from Coursera Deep Learning courses by Andrew Ng
 [Notes from Coursera Deep Learning courses by Andrew Ng](https://pt.slideshare.net/TessFerrandez/notes-from-coursera-deep-learning-courses-by-andrew-ng/)
 
-
-## 27. How to deal with missing data
-https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779
-
-1. Urgency. If not, can we dig deeper to figure out why missing?
-
-2. Importance. Is this feature important to our prediciton. If not,leave it as "Not Found".
-
-3. What algorithm. If tree-based, we don't need to imputate.
-
-When we do need to imputate data:
-1) Mean/Median
-2) Zero/Constanct
-3) Modeling: KNN, MICE (Multivariate Imputation by Chained Equation), Deep_learning
-4) Time series specific: last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
