@@ -162,9 +162,10 @@ Review: power-calculation for A/B testing.
 
 ## 9. What are bias and variance, and what are their relation to modeling data?
 **Bias** is how far removed a model's predictions are from correctness.
-**variance** is the degree to which these predictions vary between model iterations.
 
-![alt text](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=2ahUKEwjDh7HI29_iAhUSsJ4KHcrUAigQjRx6BAgBEAQ&url=http%3A%2F%2Fwww.ugba198.com%2Ffiles%2Fnotes%2Fn4.pdf&psig=AOvVaw1JJ2NaabwwacBw3_XxFBSK&ust=1560283611011780)
+**Variance** is the degree to which these predictions vary between model iterations.
+
+[Decomposition of bias and variance is here](https://en.wikipedia.org/wiki/Bias–variance_tradeoff)
 
 **Error due to Bias**: Due to randomness in the underlying data sets, the resulting models will have a range of predictions. [Bias](https://en.wikipedia.org/wiki/Bias_of_an_estimator) measures how far off in general these models' predictions are from the correct value. The bias is error from erroneous assumptions in the learning algorithm. High bias can cause an algorithm to miss the relevant relations between features and target outputs (underfitting).
 
