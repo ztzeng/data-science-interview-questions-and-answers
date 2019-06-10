@@ -40,6 +40,7 @@
 - [24. Разница между adaboost и XGBoost](#24-Разница-между-adaboost-и-xgboost)
 - [25. Data Mining Describe the decision tree model.](#25-data-mining-describe-the-decision-tree-model)
 - [26. Notes from Coursera Deep Learning courses by Andrew Ng](#26-notes-from-coursera-deep-learning-courses-by-andrew-ng)
+- [27. How to deal with missing data](#26-How-to-deal-with-missing-data)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -554,3 +555,18 @@ The cost complexity is measured by the following two parameters − Number of le
 
 ## 26. Notes from Coursera Deep Learning courses by Andrew Ng
 [Notes from Coursera Deep Learning courses by Andrew Ng](https://pt.slideshare.net/TessFerrandez/notes-from-coursera-deep-learning-courses-by-andrew-ng/)
+
+
+## 27. How to deal with missing data
+https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779
+1. Urgency. If not, can we dig deeper to figure out why missing?
+
+2. Importance. Is this feature important to our prediciton. If not,leave it as "Not Found".
+
+3. What algorithm. If tree-based, we don't need to imputate.
+
+When we do need to imputate data:
+1) Mean/Median
+2) Zero/Constanct
+3) Modeling: KNN, MICE (Multivariate Imputation by Chained Equation), Deep_learning
+4) Time series specific: last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
