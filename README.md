@@ -13,10 +13,10 @@
 - [9. What are bias and variance, and what are their relation to modeling data?](#9-what-are-bias-and-variance--and-what-are-their-relation-to-modeling-data)
     - [Approaches](#approaches)
 - [10. How to deal with missing data?](#10-How-to-deal-with-missing-data)
-- [11. What are some ways I can make my model more robust to outliers?](#11-what-are-some-ways-i-can-make-my-model-more-robust-to-outliers)
-- [12. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?](#12-in-unsupervised-learning--if-a-ground-truth-about-a-dataset-is-unknown--how-can-we-determine-the-most-useful-number-of-clusters-to-be)
-- [13. Define variance](#13-define-variance)
-- [14. Expected value](#14-expected-value)
+- [11. Outliers & leverage & influential points in Regresssion context](#11-Outliers-&-leverage-&-influential-points-in-Regresssion-context)
+- [12. What are some ways I can make my model more robust to outliers?](#12-what-are-some-ways-i-can-make-my-model-more-robust-to-outliers)
+- [13. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?](#13-in-unsupervised-learning--if-a-ground-truth-about-a-dataset-is-unknown--how-can-we-determine-the-most-useful-number-of-clusters-to-be)
+- [14. Central limit theorem](#14-Central-limit-theorem)
 - [15. Describe the differences between and use cases for box plots and histograms](#15-describe-the-differences-between-and-use-cases-for-box-plots-and-histograms)
 - [16. How would you find an anomaly in a distribution?](#16-how-would-you-find-an-anomaly-in-a-distribution)
     - [Statistical methods](#statistical-methods)
@@ -219,42 +219,50 @@ When we do need to imputate data:
 3) Modeling: KNN, MICE (Multivariate Imputation by Chained Equation), Deep_learning
 4) Time series specific: last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
 
-## 11. What are some ways I can make my model more robust to outliers?
-There are several ways to make a model more robust to outliers, from different points of view (data preparation or model building). An outlier in the question and answer is assumed being unwanted, unexpected, or a must-be-wrong value to the human’s knowledge so far (e.g. no one is 200 years old) rather than a rare event which is possible but rare.
+## 11. Outliers & leverage & influential points in Regresssion context
+1. Outliers, y not following the pattern
 
-Outliers are usually defined in relation to the distribution. Thus outliers could be removed in the pre-processing step (before any learning step), by using standard deviations `(Mean +/- 2*SD)`, it can be used for normality. Or interquartile ranges `Q1 - Q3`, `Q1` -  is the "middle" value in the first half of the rank-ordered data set, `Q3` - is the "middle" value in the second half of the rank-ordered data set. It can be used for not normal/unknown as threshold levels.
+   e_i^2/s^2 * p, When it > 9, it is.
+2. Leverage, extreme x 
 
-Moreover, data transformation (e.g. log transformation) may help if data have a noticeable tail. When outliers related to the sensitivity of the collecting instrument which may not precisely record small values, Winsorization may be useful. This type of transformation (named after Charles P. Winsor (1895–1951)) has the same effect as clipping signals (i.e. replaces extreme data values with less extreme values).  Another option to reduce the influence of outliers is using mean absolute difference rather mean squared error.
+   h_ii = partial derivate of y^hat_i over y_i, When h_ii > 2 * p/n, it is.
+3. Influential points, defined by cook's distance
 
-For model building, some models are resistant to outliers (e.g. tree-based approaches) or non-parametric tests. Similar to the median effect, tree models divide each node into two in each split. Thus, at each split, all data points in a bucket could be equally treated regardless of extreme values they may have.
+   Cook's distance = e_i^2/(s^2 * p) * h_ii/(1-h_ii)^2, When Cook's distance > 4/(n-p), it's influential point
 
-## 12. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?
-The elbow method is often the best place to state, and is especially useful due to its ease of explanation and verification via visualization. The elbow method is interested in explaining variance as a function of cluster numbers (the k in k-means). By plotting the percentage of variance explained against k, the first N clusters should add significant information, explaining variance; yet, some eventual value of k will result in a much less significant gain in information, and it is at this point that the graph will provide a noticeable angle. This angle will be the optimal number of clusters, from the perspective of the elbow method,
-It should be self-evident that, in order to plot this variance against varying numbers of clusters, varying numbers of clusters must be tested. Successive complete iterations of the clustering method must be undertaken, after which the results can be plotted and compared.
-DBSCAN - Density-Based Spatial Clustering of Applications with Noise. Finds core samples of high density and expands clusters from them. Good for data which contains clusters of similar density.
+## 12. What are some ways I can make my model more robust to outliers?
+1. Define Outliers
 
-## 13. Define variance
-Variance is the expectation of the squared deviation of a random variable from its mean. Informally, it measures how far a set of (random) numbers are spread out from their average value. The variance is the square of the standard deviation, the second central moment of a distribution, and the covariance of the random variable with itself.
+   An outlier in the question and answer is assumed being unwanted, unexpected, or a must-be-wrong value to the human’s knowledge so far (e.g. no one is 200 years old). Not a rare event which is possible but rare. 
+   Outliers are usually defined in relation to the distribution. 
+   
+2. Remove by data preparation
+    Since outliers are related to Std, it could be removed in the pre-processing step (before any learning step). For normal distribued data, using standard deviations `(Mean +/- 2*SD)` to remove outliers. For non-normal data, use interquartile ranges `Q1 - Q3`, `Q1` -  is the "middle" value in the first half of the rank-ordered data set, `Q3` - is the "middle" value in the second half of the rank-ordered data set. 
+    Moreover, data transformation (e.g. log transformation) may help if data have a noticeable tail. When outliers related to the sensitivity of the collecting instrument which may not precisely record small values, Winsorization may be useful. A 90% winsorization would see all data below the 5th percentile set to the 5th percentile, and data above the 95th percentile set to the 95th percentile.
 
-Var(X) = E[(X - m)^2], m=E[X]
+3. Choose wisely for algorithmns and Loss functions
+   For model building, some models are resistant to outliers (e.g. tree-based approaches) or non-parametric tests. Similar to the median effect, tree models divide each node into two in each split. Thus, at each split, all data points in a bucket could be equally treated regardless of extreme values they may have.
+   For loss functions, using MAE rather MSE.
 
-Мера разброса значений случайной величины относительно её математического ожидания.
 
-## 14. Expected value
-Математи́ческое ожидание — [среднее значение случайной величины](https://ru.wikipedia.org/wiki/%D0%A1%D0%BB%D1%83%D1%87%D0%B0%D0%B9%D0%BD%D0%B0%D1%8F_%D0%B2%D0%B5%D0%BB%D0%B8%D1%87%D0%B8%D0%BD%D0%B0) ([распределение вероятностей](https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B2%D0%B5%D1%80%D0%BE%D1%8F%D1%82%D0%BD%D0%BE%D1%81%D1%82%D0%B5%D0%B9) случайной величины, рассматривается в теории вероятностей). Значение, которое случайная величина принимает с наибольшей вероятностью.
+## 13. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?
+1. The actual needs of clusters
+2. Observation
+3. The elbow method
+   X-ais = Number of clusters
+   Y-asis = Sum of within group distance (DK)
+   DK=∑∑(X_i−M_i)^2
+   By plotting the percentage of variance explained against k, the first N clusters should add significant information, explaining variance; yet, some eventual value of k will result in a much less significant gain in information, and it is at this point that the graph will provide a noticeable angle. This angle will be the optimal number of clusters, from the perspective of the elbow method,
+4. [Gap Statistic](https://web.stanford.edu/~hastie/Papers/gap.pdf)
+   X-ais = Number of clusters
+   Y-asis = Gap Statistics
+   where Gap(K)=E(logDk)−logDk. We can compute mean of (logDk) by MC.
+   When Gap(K) reaches Max, it is the optimal K.
 
-Предположим теперь, что мы знаем закон распределения случайной величины x, то есть знаем, что случайная величина x может принимать значения x1, x2, ..., xk с вероятностями p1, p2, ..., pk.
-Математическое ожидание Mx случайной величины x равно.
-Математическое ожидание случайной величины X (обозначается M(X) или реже E(X)) характеризует среднее значение случайной величины (дискретной или непрерывной). Мат. ожидание - это первый начальный момент заданной СВ.
+## 14. Central limit theorem
+1. When an infinite number of successive random samples are taken from a population, irrespective of the shape of the population distribution, the sampling mean will become approximately normally distributed with mean μ and standard deviation σ/√ N. Where μ is the population mean, σ is the population std.
 
-Математическое ожидание относят к так называемым характеристикам положения распределения (к которым также принадлежат мода и медиана). Эта характеристика описывает некое усредненное положение случайной величины на числовой оси. Скажем, если матожидание случайной величины - срока службы лампы, равно 100 часов, то считается, что значения срока службы сосредоточены (с обеих сторон) от этого значения (с тем или иным разбросом, о котором уже говорит дисперсия).
-Математическое ожидание дискретной случайной величины Х вычисляется как сумма произведений значений xi, которые принимает СВ Х, на соответствующие вероятности pi:
-```python
-import numpy as np
-X = [3,4,5,6,7]
-P = [0.1,0.2,0.3,0.4,0.5]
-np.sum(np.dot(X, P))
-```
+2. Why important? CLT that probabilistic and statistical methods that work for normal distributions can be applicable to many problems involving other types of distributions, like in the context of AB testing.
 
 ## 15. Describe the differences between and use cases for box plots and histograms
 A [histogram](http://www.brighthubpm.com/six-sigma/13307-what-is-a-histogram/) is a type of bar chart that graphically displays the frequencies of a data set. Similar to a bar chart, a histogram plots the frequency, or raw count, on the Y-axis (vertical) and the variable being measured on the X-axis (horizontal).
