@@ -15,7 +15,7 @@
 - [10. How to deal with missing data?](#10-How-to-deal-with-missing-data)
 - [11. Outliers & leverage & influential points in Regresssion context](#11-Outliers-&-leverage-&-influential-points-in-Regresssion-context)
 - [12. What are some ways I can make my model more robust to outliers?](#12-what-are-some-ways-i-can-make-my-model-more-robust-to-outliers)
-- [13. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?](#13-in-unsupervised-learning--if-a-ground-truth-about-a-dataset-is-unknown--how-can-we-determine-the-most-useful-number-of-clusters-to-be)
+- [13. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?](#13-in-unsupervised-learning--if-a-ground-truth-about-a-dataset-is-unknown--how-can-we-determine-the-most-useful-number-of-clusters-to-be?)
 - [14. Central limit theorem](#14-Central-limit-theorem)
 - [15. Describe the differences between and use cases for box plots and histograms](#15-describe-the-differences-between-and-use-cases-for-box-plots-and-histograms)
 - [16. How would you find an anomaly in a distribution?](#16-how-would-you-find-an-anomaly-in-a-distribution)
