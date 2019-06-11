@@ -13,7 +13,7 @@
 - [9. What are bias and variance, and what are their relation to modeling data?](#9-what-are-bias-and-variance--and-what-are-their-relation-to-modeling-data)
     - [Approaches](#approaches)
 - [10. How to deal with missing data?](#10-How-to-deal-with-missing-data)
-- [11. Outliers,leverage,influential points in Regresssion context](#11-Outliers-leverage-influential-points-in-Regresssion-context)
+- [11. Outliers and leverage and influential points in Regresssion context](#11-Outliers-and-leverage-and-influential-points-in-Regresssion-context)
 - [12. What are some ways I can make my model more robust to outliers?](#12-what-are-some-ways-i-can-make-my-model-more-robust-to-outliers)
 - [13. In unsupervised learning, how can we determine the most useful number of clusters to be?](#13-In-unsupervised-learning-how-can-we-determine-the-most-useful-number-of-clusters-to-be)
 - [14. Central limit theorem](#14-Central-limit-theorem)
@@ -221,7 +221,7 @@ When we do need to imputate data:
    
    last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
 
-## 11. Outliers,leverage,influential points in Regresssion context
+## 11. Outliers and leverage and influential points in Regresssion context
 1. Outliers, y not following the pattern
 
    e_i^2/s^2 * p, When it > 9, it is.
