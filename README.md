@@ -217,7 +217,9 @@ When we do need to imputate data:
 1) Mean/Median
 2) Zero/Constanct
 3) Modeling: KNN, MICE (Multivariate Imputation by Chained Equation), Deep_learning
-4) Time series specific: last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
+4) Time series specific: 
+   
+   last_value_carry_forward, next_value_carry_backward, seasonal_interpolation,
 
 ## 11. Outliers & leverage & influential points in Regresssion context
 1. Outliers, y not following the pattern
@@ -247,16 +249,23 @@ When we do need to imputate data:
 
 ## 13. In unsupervised learning, if a ground truth about a dataset is unknown, how can we determine the most useful number of clusters to be?
 1. The actual needs of clusters
+ 
 2. Observation
+ 
 3. The elbow method
+ 
    X-ais = Number of clusters
    Y-asis = Sum of within group distance (DK)
    DK=∑∑(X_i−M_i)^2
-   By plotting the percentage of variance explained against k, the first N clusters should add significant information, explaining variance; yet, some eventual value of k will result in a much less significant gain in information, and it is at this point that the graph will provide a noticeable angle. This angle will be the optimal number of clusters, from the perspective of the elbow method,
+   
+   By plotting the percentage of variance explained against k, the first N clusters should add significant information, explaining variance; yet, some eventual value of k will result in a much less significant gain in information, and it is at this point that the graph will provide a noticeable angle. This angle will be the optimal number of clusters, from the perspective of the elbow method.
+   
 4. [Gap Statistic](https://web.stanford.edu/~hastie/Papers/gap.pdf)
+ 
    X-ais = Number of clusters
    Y-asis = Gap Statistics
    where Gap(K)=E(logDk)−logDk. We can compute mean of (logDk) by MC.
+    
    When Gap(K) reaches Max, it is the optimal K.
 
 ## 14. Central limit theorem
