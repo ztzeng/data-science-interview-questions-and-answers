@@ -20,7 +20,7 @@
 - [15. Describe the differences between and use cases for box plots and histograms](#15-describe-the-differences-between-and-use-cases-for-box-plots-and-histograms)
 - [16. How would you find an anomaly in a distribution?](#16-how-would-you-find-an-anomaly-in-a-distribution)
     - [Statistical methods](#statistical-methods)
-    - [Метрические методы](#)
+    - [Clustering-based anomaly detection](#Clustering-based-anomaly-detection)
 - [17. How do you deal with outliers in your data?](#17-how-do-you-deal-with-outliers-in-your-data)
 - [18. How do you deal with sparse data?](#18-how-do-you-deal-with-sparse-data)
 - [19. Big Data Engineer Can you explain what REST is?](#19-big-data-engineer-can-you-explain-what-rest-is)
