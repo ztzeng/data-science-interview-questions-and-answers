@@ -346,48 +346,40 @@ REST is a lightweight alternative to mechanisms like RPC (Remote Procedure Calls
 
 
 ## 21. What is the effect on the coefficients of logistic regression if two predictors are highly correlated? What are the confidence intervals of the coefficients?
-When predictor variables are correlated, the estimated regression coefficient of any one variable depends on which other predictor variables are included in the model. When predictor variables are correlated, the precision of the estimated regression coefficients decreases as more predictor variables are added to the model.
 
-In statistics, multicollinearity (also collinearity) is a phenomenon in which two or more predictor variables in a multiple regression model are highly correlated, meaning that one can be linearly predicted from the others with a substantial degree of accuracy. In this situation the coefficient estimates of the multiple regression may change erratically in response to small changes in the model or the data. Multicollinearity does not reduce the predictive power or reliability of the model as a whole, at least within the sample data set; it only affects calculations regarding individual predictors. That is, a multiple regression model with correlated predictors can indicate how well the entire bundle of predictors predicts the outcome variable, but it may not give valid results about any individual predictor, or about which predictors are redundant with respect to others.
+In statistics, multicollinearity (also collinearity) is a phenomenon in which two or more predictor variables in a multiple regression model are highly correlated, meaning that one can be linearly predicted from the others with a substantial degree of accuracy. 
 
-Последствия мультиколлинеарности:
-* Оценки коэффициентов остаются несмещенными
-* Стандартные ошибки коэффициентов увеличиваются
-* Вычисленные t-статистики занижены.
-* Оценки становится очень чувствительными к изменению спецификации и изменению отдельных наблюдений.
-* Общее качество уравнения, а также оценки переменных, не связанных мультиколлинеарностью, остаются незатронутыми.
-* Чем ближе мультиколлинеарность к совершенной (строгой), тем серьезнее ее последствия.
+In this situation the coefficient estimates of the multiple regression may change erratically in response to small changes in the model or the data. Multicollinearity does not reduce the predictive power or reliability of the model as a whole, at least within the sample data set; it only affects calculations regarding individual predictors. 
 
-Индикаторы мультиколлинеарности:
-1. Высокий R2 и незначимые коэффициенты.
-2. Сильная парная корреляция предикторов.
-3. Сильные частные корреляции предикторов.
-4. Высокий VIF – variance inflation factor.
+That is, a multiple regression model with correlated predictors can indicate how well the entire bundle of predictors predicts the outcome variable, but it may not give valid results about any individual predictor, or about which predictors are redundant with respect to others.
 
-Confidence interval (CI) is a type of interval estimate (of a population parameter) that is computed from the observed data. The confidence level is the frequency (i.e., the proportion) of possible confidence intervals that contain the true value of their corresponding parameter. In other words, if confidence intervals are constructed using a given confidence level in an infinite number of independent experiments, the proportion of those intervals that contain the true value of the parameter will match the confidence level.
+Consequences of multicollinerity:
+* In perfect collinearity, some beta_i cannot get
+* In partial multicollinearity, the estimated coefficients are still BLUE, but variance +
+* CI +, t-statistical -, R^2 +
+* Estimates become very sensitive to changes in specification and changes in individual observations
 
-Confidence intervals consist of a range of values (interval) that act as good estimates of the unknown population parameter. However, the interval computed from a particular sample does not necessarily include the true value of the parameter. Since the observed data are random samples from the true population, the confidence interval obtained from the data is also random. If a corresponding hypothesis test is performed, the confidence level is the complement of the level of significance, i.e. a 95% confidence interval reflects a significance level of 0.05. If it is hypothesized that a true parameter value is 0 but the 95% confidence interval does not contain 0, then the estimate is significantly different from zero at the 5% significance level.
+Indicators:
+1. High R^2 and in-significant ratios
+2. Strong correlation coefficients between Xs
+3. High VIF ( bigger than 5 ), variance inflation factor
 
-The desired level of confidence is set by the researcher (not determined by data). Most commonly, the 95% confidence level is used. However, other confidence levels can be used, for example, 90% and 99%.
-
-Factors affecting the width of the confidence interval include the size of the sample, the confidence level, and the variability in the sample. A larger sample size normally will lead to a better estimate of the population parameter.
-A Confidence Interval is a range of values we are fairly sure our true value lies in.
-
-`X  ±  Z*s/√(n)`, X is the mean, Z is the chosen Z-value from the table, s is the standard deviation, n is the number of samples. The value after the ± is called the margin of error.
+   VIF = 1 / (1 - R_i^2) , where R_i is the regression R^2 of X_i against all other Xs
 
 ## 22. What’s the difference between Gaussian Mixture Model and K-Means?
+
 Let's says we are aiming to break them into three clusters. K-means will start with the assumption that a given data point belongs to one cluster.
 
 Choose a data point. At a given point in the algorithm, we are certain that a point belongs to a red cluster. In the next iteration, we might revise that belief, and be certain that it belongs to the green cluster. However, remember, in each iteration, we are absolutely certain as to which cluster the point belongs to. This is the "hard assignment".
 
 What if we are uncertain? What if we think, well, I can't be sure, but there is 70% chance it belongs to the red cluster, but also 10% chance its in green, 20% chance it might be blue. That's a soft assignment. The Mixture of Gaussian model helps us to express this uncertainty. It starts with some prior belief about how certain we are about each point's cluster assignments. As it goes on, it revises those beliefs. But it incorporates the degree of uncertainty we have about our assignment.
 
-Kmeans: find kk to minimize `(x−μk)^2`
+Kmeans: find k to minimize `(x−μk)^2`
 
-Gaussian Mixture (EM clustering) : find kk to minimize `(x−μk)^2/σ^2`
+Gaussian Mixture (EM clustering) : find k to minimize `(x−μk)^2/σ^2`
 
-The difference (mathematically) is the denominator “σ^2”, which means GM takes variance into consideration when it calculates the measurement.
-Kmeans only calculates conventional Euclidean distance.
+The difference (mathematically) is the denominator “σ^2”, which means GM takes variance into consideration when it calculates the measurement. While kmeans only calculates conventional Euclidean distance.
+
 In other words, Kmeans calculate distance, while GM calculates “weighted” distance.
 
 **K means**:
