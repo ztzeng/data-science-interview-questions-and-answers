@@ -37,8 +37,8 @@
     - [Weighted Updates](#weighted-updates)
     - [Stochastic Gradient Boosting](#stochastic-gradient-boosting)
     - [Penalized Gradient Boosting](#penalized-gradient-boosting)
-- [24. Difference between Adaboost/GB/XGBoost](#Difference-between-Adaboost/GB/XGBoost)
-- [25. Data Mining Describe the decision tree model](#25-data-mining-describe-the-decision-tree-model)
+- [24. Difference between Adaboost and GB and XGBoost](#24-Difference-between-Adaboost-and-GB-and-XGBoost)
+- [25. How does a DT split](#25-How-does-a-DT-split)
 - [26. Notes from Coursera Deep Learning courses by Andrew Ng](#26-notes-from-coursera-deep-learning-courses-by-andrew-ng)
 
 ## 1. Why do you use feature selection?
@@ -519,7 +519,7 @@ More details in 2 posts (russian):
 * https://habr.com/company/ods/blog/327250/
 * https://alexanderdyakonov.files.wordpress.com/2017/06/book_boosting_pdf.pdf
 
-## 24. Difference between Adaboost/GB/XGBoost
+## 24. Difference between Adaboost and GB and XGBoost
 
 Adaboost is more about 'voting weights' and Gradient boosting is more about 'adding gradient optimization'. 
 
