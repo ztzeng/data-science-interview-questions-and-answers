@@ -535,13 +535,15 @@ XGBoost uses a few computational tricks that exploit a computer's hardware to sp
 
 A decision tree is a structure that includes a root node, branches, and leaf nodes. Each internal node denotes a test on an attribute, each branch denotes the outcome of a test, and each leaf node holds a class label. The top_most node in the tree is the root node.
 
-### 1. Information Gain, we split on the feature that gives us the highest IG.
+### 1. Information Gain.
+
+we split on the feature that gives us the highest IG.
 
 IG is the difference in entropy, where **H(S) = -sum(P_c * log2(P_c))**  and P_c is the proportion of the # of elements in class C
     
 Steps: 
 
-    1. compute the entropy for data-set
+    1.compute the entropy for data-set
    
     2.for every attribute/feature:
    
@@ -554,7 +556,9 @@ Steps:
     4.Repeat until we get the tree we desired
 
 
-### 2. Gini Impurity, it gives an idea of how good a split is by how mixed the classes are in the two groups created by the split. We pick the split to minimize gini.
+### 2. Gini Impurity.
+
+It gives an idea of how good a split is by how mixed the classes are in the two groups created by the split. We pick the split to minimize gini.
 
 Gini = 1 - sum(P_t^2) where P_t is the proportion of elements belongs to class t.
 
@@ -562,7 +566,9 @@ Maximum value of Gini Index could be when all target values are equally distribu
 
 Minimum value of Gini Index will be 0 when all observations belong to one label.
 
-### 3. Variance reduction (regression tree), The variance reduction of a node N is defined as the total reduction of the variance of the target variable x due to the split at this node. 
+### 3. Variance reduction (regression tree)
+
+The variance reduction of a node N is defined as the total reduction of the variance of the target variable x due to the split at this node. 
 
 
 
