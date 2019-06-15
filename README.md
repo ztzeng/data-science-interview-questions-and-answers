@@ -535,44 +535,36 @@ XGBoost uses a few computational tricks that exploit a computer's hardware to sp
 
 A decision tree is a structure that includes a root node, branches, and leaf nodes. Each internal node denotes a test on an attribute, each branch denotes the outcome of a test, and each leaf node holds a class label. The top_most node in the tree is the root node.
 
-1. Information Gain, we split on the feature that gives us the highest IG.
+### 1. Information Gain, we split on the feature that gives us the highest IG.
 
-   IG is the difference in entropy, where **H(S) = -sum(P_c * log2(P_c))**  and P_c is the proportion of the # of elements in class C
+IG is the difference in entropy, where **H(S) = -sum(P_c * log2(P_c))**  and P_c is the proportion of the # of elements in class C
     
-   Steps: 
+Steps: 
 
-   1) compute the entropy for data-set
+    1. compute the entropy for data-set
    
-   2) for every attribute/feature:
+    2.for every attribute/feature:
    
        calculate entropy for all categorical values
        take average information entropy for the current attribute
        calculate gain for the current attribute
        
-   3) pick the highest gain attribute
+    3.pick the highest gain attribute
    
-   4) Repeat until we get the tree we desired
+    4.Repeat until we get the tree we desired
 
 
-2. Gini Index, it gives an idea of how good a split is by how mixed the classes are in the two groups created by the split. We pick the split to minimize gini.
-   
+### 2. Gini Impurity, it gives an idea of how good a split is by how mixed the classes are in the two groups created by the split. We pick the split to minimize gini.
+
+Gini = 1 - sum(P_t^2) where P_t is the proportion of elements belongs to class t.
+
+Maximum value of Gini Index could be when all target values are equally distributed.
+
+Minimum value of Gini Index will be 0 when all observations belong to one label.
+
+### 3. Variance reduction (regression tree), The variance reduction of a node N is defined as the total reduction of the variance of the target variable x due to the split at this node. 
 
 
-
-
-**Tree Pruning**
-
-Tree pruning is performed in order to remove anomalies in the training data due to noise or outliers. The pruned trees are smaller and less complex.
-
-**Tree Pruning Approaches**
-
-Here is the Tree Pruning Approaches listed below:
-* Pre-pruning − The tree is pruned by halting its construction early.
-* Post-pruning - This approach removes a sub-tree from a fully grown tree.
-
-**Cost Complexity**
-
-The cost complexity is measured by the following two parameters − Number of leaves in the tree, and Error rate of the tree.
 
 ## 26. Notes from Coursera Deep Learning courses by Andrew Ng
 [Notes from Coursera Deep Learning courses by Andrew Ng](https://pt.slideshare.net/TessFerrandez/notes-from-coursera-deep-learning-courses-by-andrew-ng/)
