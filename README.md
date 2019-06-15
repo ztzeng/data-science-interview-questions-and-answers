@@ -535,11 +535,30 @@ XGBoost uses a few computational tricks that exploit a computer's hardware to sp
 
 A decision tree is a structure that includes a root node, branches, and leaf nodes. Each internal node denotes a test on an attribute, each branch denotes the outcome of a test, and each leaf node holds a class label. The top_most node in the tree is the root node.
 
-Each internal node represents a test on an attribute. Each leaf node represents a class.
-The benefits of having a decision tree are as follows:
-* It does not require any domain knowledge.
-* It is easy to comprehend.
-* The learning and classification steps of a decision tree are simple and fast.
+1. Information Gain, we split on the feature that gives us the highest IG.
+
+   IG is the difference in entropy, where **H(S) = -sum(P_c * log2(P_c))**  and P_c is the proportion of the # of elements in class C
+    
+   Steps: 
+
+   1) compute the entropy for data-set
+   
+   2) for every attribute/feature:
+   
+       calculate entropy for all categorical values
+       take average information entropy for the current attribute
+       calculate gain for the current attribute
+       
+   3) pick the highest gain attribute
+   
+   4) Repeat until we get the tree we desired
+
+
+2. Gini Index, it gives an idea of how good a split is by how mixed the classes are in the two groups created by the split. We pick the split to minimize gini.
+   
+
+
+
 
 **Tree Pruning**
 
