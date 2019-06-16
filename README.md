@@ -269,11 +269,13 @@ When we do need to imputate data:
    When Gap(K) reaches Max, it is the optimal K.
 
 ## 14. Central limit theorem
+ 
 1. When an infinite number of successive random samples are taken from a population, irrespective of the shape of the population distribution, the sampling mean will become approximately normally distributed with mean μ and standard deviation σ/√ N. Where μ is the population mean, σ is the population std.
 
 2. Why important? CLT that probabilistic and statistical methods that work for normal distributions can be applicable to many problems involving other types of distributions, like in the context of AB testing.
 
 ## 15. Describe the differences between and use cases for box plots and histograms
+ 
 A [histogram](http://www.brighthubpm.com/six-sigma/13307-what-is-a-histogram/) is a type of bar chart that graphically displays the frequencies of a data set. It plots the frequency on the Y-axis (vertical) and the variable being measured on the X-axis (horizontal).
  
 A box plot, also called a [box-and-whisker](http://www.brighthubpm.com/six-sigma/43824-using-box-and-whiskers-plots/) plot, is a chart that graphically represents the five most important descriptive values for a data set. These values include the minimum value, the first quartile, the median, the third quartile, and the maximum value. When graphing this five-number summary, only the horizontal axis displays values. Within the quadrant, a vertical line is placed above each of the summary numbers. A box is drawn around the middle three lines (first quartile, median, and third quartile) and two lines are drawn from the box’s edges to the two endpoints (minimum and maximum).
@@ -282,6 +284,7 @@ Boxplots are better for comparing distributions than histograms!
 ![alt text](images/histogram-vs-boxplot.png)
 
 ## 16. How would you find an anomaly in a distribution?
+ 
 #### Define anomalies
 
    1) Point anomalies: A single instance of data is anomalous if it's too far off from the rest. Business use case: Detecting credit card fraud based on "amount spent."
@@ -293,18 +296,18 @@ Boxplots are better for comparing distributions than histograms!
 #### Methods
 
 1. Statistical methods
+
 Statistically based anomaly detection uses this knowledge to discover outliers. A dataset can be standardized by taking the z-score of each point. 
  
 A z-score is a measure of how many standard deviations a data point is away from the mean of the data. Any data-point that has a z-score higher than 3 is an outlier, and likely to be an anomaly. As the z-score increases above 3, points become more obviously anomalous. A z-score is calculated using the following equation. A box-plot is perfect for this application.
 
-![alt text](images/metrical-methods.png)
 
 2. Clustering-based anomaly detection
-
+ 
 Using this approach to anomaly detection, a point is classified as an anomaly if its omission from the group significantly improves the prototype, then the point is classified as an anomaly. 
-
+ 
 In unsupervise learning, like K-means, Isolation Forest. In K-means, the degree to which the removal of a point would increase the accuracy of the centroid is the difference in the SSE, or standard squared error, or the cluster with and without the point. If there is a substantial improvement in SSE after the removal of the point, that correlates to a high outlier score for that point.
-
+ 
 In semi-supervise learning, like AutoEncoder. We encode the normal dataset, then decode the data. If the distribution of normal/abnormal are different, then we cannot decode the abnormal data. In this case, if MSE/MAE > threshold, we classify it as abnormal.
 
 
@@ -327,12 +330,15 @@ One option is to try a transformation. Square root and log transformations both 
 ## 19. Big Data Engineer Can you explain what REST is?
 
 REST stands for Representational State Transfer. (It is sometimes spelled "ReST".) It relies on a stateless, client-server, cacheable communications protocol -- and in virtually all cases, the HTTP protocol is used.
+ 
 REST is an architecture style for designing networked applications. The idea is simple HTTP is used to make calls between machines.
+ 
 * In many ways, the World Wide Web itself, based on HTTP, can be viewed as a REST-based architecture.
 RESTful applications use HTTP requests to post data (create and/or update), read data (e.g., make queries), and delete data. Thus, REST uses HTTP for all four CRUD (Create/Read/Update/Delete) operations.
 REST is a lightweight alternative to mechanisms like RPC (Remote Procedure Calls) and Web Services (SOAP, WSDL, et al.). Later, we will see how much more simple REST is.
+ 
 * Despite being simple, REST is fully-featured; there's basically nothing you can do in Web Services that can't be done with a RESTful architecture.
-
+   
 ## 20. Logistic regression
 
 1. Formula
