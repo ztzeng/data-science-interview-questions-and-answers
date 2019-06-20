@@ -40,6 +40,7 @@
 - [24. Difference between Adaboost and GB and XGBoost](#24-Difference-between-Adaboost-and-GB-and-XGBoost)
 - [25. How does a DT split](#25-How-does-a-DT-split)
 - [26. Notes from Coursera Deep Learning courses by Andrew Ng](#26-notes-from-coursera-deep-learning-courses-by-andrew-ng)
+- [27. Likelihood VS Probability](#27-Likelihood-VS-Probability)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -582,4 +583,15 @@ The variance reduction of a node N is defined as the total reduction of the vari
 
 ## 26. Notes from Coursera Deep Learning courses by Andrew Ng
 [Notes from Coursera Deep Learning courses by Andrew Ng](https://pt.slideshare.net/TessFerrandez/notes-from-coursera-deep-learning-courses-by-andrew-ng/)
+
+
+## 27. Likelihood VS Probability
+ 
+Likelihood is the probability that an event that has already occurred would yield a specific outcome. 
+ 
+Probability refers to the occurrence of future events, while a likelihood refers to past events with known outcomes. 
+
+![alt text](images/likelihood-probability.png)
+
+
 
