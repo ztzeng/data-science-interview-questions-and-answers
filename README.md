@@ -41,6 +41,7 @@
 - [25. How does a DT split](#25-How-does-a-DT-split)
 - [26. Notes from Coursera Deep Learning courses by Andrew Ng](#26-notes-from-coursera-deep-learning-courses-by-andrew-ng)
 - [27. Likelihood VS Probability](#27-Likelihood-VS-Probability)
+- [28. When to stop training the model](#28-When-to-stop-training-the-model)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -592,6 +593,20 @@ Likelihood is the probability that an event that has already occurred would yiel
 Probability refers to the occurrence of future events, while a likelihood refers to past events with known outcomes. 
 
 ![alt text](images/likelihood-probability.png)
+
+
+## 28. When to stop training the model
+
+1. Is there a special requirement or context? Is it urgent? What's the cost to continue?
+
+        1) If there is a special requirement, check with other teams to see if the result meets their requirement.
+ 
+        2) If there is not, do the math, what's the cost and earn by this model.
+        
+        3) If it is worthy to continue, try to get more features/other algorithm to see if the model can improve. Also, use new data to test for stability.
+        
+2. While check the result, also use "next day" data to test if it's stable and not overfitting. If it's a classfication problem, check confusion matrix to see if there is a pattern to correct.
+
 
 
 
