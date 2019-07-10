@@ -42,6 +42,7 @@
 - [26. Notes from Coursera Deep Learning courses by Andrew Ng](#26-notes-from-coursera-deep-learning-courses-by-andrew-ng)
 - [27. Likelihood VS Probability](#27-Likelihood-VS-Probability)
 - [28. When to stop training the model](#28-When-to-stop-training-the-model)
+- [29. Logistic regression VS Random Forest](#29-Logistic-regression-VS-Random-Forest)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -608,5 +609,7 @@ Probability refers to the occurrence of future events, while a likelihood refers
 2. While check the result, also use "next day" data to test if it's stable and not overfitting. If it's a classfication problem, check confusion matrix to see if there is a pattern to correct.
 
 
+## 29. Logistic regression VS Random Forest
+![alt text](images/LRRF.png)
 
 
