@@ -610,6 +610,6 @@ Probability refers to the occurrence of future events, while a likelihood refers
 
 
 ## 29. Logistic regression VS Random Forest
-![alt text](images/LRRF.png)
+![alt text](images/LRRF.jpg)
 
 
