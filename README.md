@@ -74,16 +74,17 @@ Regularization is a very important technique in machine learning to prevent over
 The difference between their properties can be promptly summarized as follows:
 ![alt text](images/regularization2.png)
 
-**Why** 
+**Why L1 can produce sparse** 
+
 For L1, the gradient is: Sign(w_i) = 1 or -1
 
-For L2, the gradient is: w_i
+For L2, the gradient is: 2*w_i
 
 So in the update process:
 
 L1: w_i = w_i - learning_rate * 1 or(-1), eventurally, w_i may be 0.
 
-L2: w_i = w_i - learning_rate * w_i, eventurally, w_i decade to some small amount but not 0.
+L2: w_i = w_i - learning_rate * 2*w_i, eventurally, w_i decade to some small amount but not 0.
 
 ## 4. How would you validate a model you created to generate a predictive model of a quantitative outcome variable using multiple regression?
 [Proposed methods](http://support.sas.com/resources/papers/proceedings12/333-2012.pdf) for model validation:
