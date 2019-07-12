@@ -43,6 +43,7 @@
 - [27. Likelihood VS Probability](#27-Likelihood-VS-Probability)
 - [28. When to stop training the model](#28-When-to-stop-training-the-model)
 - [29. Logistic regression VS Random Forest](#29-Logistic-regression-VS-Random-Forest)
+- [30. Vanishing and Exploding gradients](#30-Vanishing-and-Exploding-gradients)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -620,5 +621,29 @@ Probability refers to the occurrence of future events, while a likelihood refers
 
 ## 29. Logistic regression VS Random Forest
 ![alt text](images/LRRF.jpg)
+
+
+## 30. Vanishing and Exploding gradients
+
+They are the problem resulting from backpropagation.
+
+Gradient is the gradient of the loss-function, with respect to the weights in the network. Also, the gradient is calculated through the backpropagation, and we use it to update our weights.
+
+1. Vanishing Gradients: The weights in the earlier NN is very small. So in the updating process, the weights in the next layers are barely changing, no much of learning or helping minimize the loss function.
+
+   Exploding Gradients are the opposite, where the weight are updated so much so perhaps that the optimal value for this weight won't ever be achieved b/c the proportion to which the weight becomes updated
+with each epoch is just too large and continous to move further away from its optimal value. 
+
+2. How occur? 
+   
+   We calculate gradient in the chain rule of derivatives: gradient = a * b * c * d....
+   
+   When some of the derivates are small in this chain, then the weight are updated very tiny bit.
+   
+   When some of the derivates are big(>1) in this chain, then the weight are updated so much so the optimal value can't be reached.
+
+3. Ways to reduce.
+    
+   Rduce layers, weight initialization, alternate activation functions
 
 
