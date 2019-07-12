@@ -44,6 +44,8 @@
 - [28. When to stop training the model](#28-When-to-stop-training-the-model)
 - [29. Logistic regression VS Random Forest](#29-Logistic-regression-VS-Random-Forest)
 - [30. Vanishing and Exploding gradients](#30-Vanishing-and-Exploding-gradients)
+- [31. Stochastic Gradient Descent](#31-Stochastic-Gradient-Descent)
+- [32. Batch size and Batchnorm](#32-Batch-size-and-Batchnorm)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -645,5 +647,34 @@ with each epoch is just too large and continous to move further away from its op
 3. Ways to reduce.
     
    Rduce layers, weight initialization, alternate activation functions
+   
+   
+## 31. Stochastic Gradient Descent
 
+Gradient Descent: For every step we take, we use all the data and all partial derivatives to update the weights
+
+SGD: For every step we take, we randomly choose one sample (or a mini-batch of samples), to this sample to calculate the derivatives.
+
+   It's super userful when large data or redundancies of data. Also, when we have a new data coming in, we only need to take another step for estimation without starting all over.
+
+## 32. Batch size and Batchnorm
+
+1. Batch size is the number of samples that will be passed through to the NN at one time.
+
+   ! = Epoch, epoch is one path of all samples through the NN.
+   
+   Eg, Total 100 images of dog, we set batch size = 10, then we will have 10 dogs as a group to pass the NN at one time.
+    
+   But 1 epoch is for the whole 100 images to pass the NN.
+   
+2. Batchnorm
+
+   Norm often refer to a kind of data transformation, Z = (x - u) / s
+   
+   In NN, we want to normalize the data coming in, but also the data comes out from each layer. So, we normalize the output from activation function to Z = (x - u)/s * g + b, where g and b are trainable.
+   
+   By doing this, we have balanced weigths, not too large or too low; also the training process will be faster.
+   
+   
+   
 
