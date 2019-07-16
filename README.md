@@ -46,6 +46,7 @@
 - [30. Vanishing and Exploding gradients](#30-Vanishing-and-Exploding-gradients)
 - [31. Stochastic Gradient Descent](#31-Stochastic-Gradient-Descent)
 - [32. Batch size and Batchnorm](#32-Batch-size-and-Batchnorm)
+- [33. SVD and PCA](#33-SVD-and-PCA)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -676,5 +677,10 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    By doing this, we have balanced weigths, not too large or too low; also the training process will be faster.
    
    
+## 33. SVD and PCA
+   SVD (Singular Value Decomposition)is a linear algebra method that decomposes a matrix into 3 resultant matrics to reduce information redundancy and noise. Most commonly used for PCA(Principal Component Analysis).
+   ie, A (original Matrix) = U * S * V
    
-
+   U: Left orthogonal matrix, holds important, non-redundant information about observations.
+   V: Right orthogonal matrix, holds important, non-redundant information about observations.
+   S: Diagonal matrix, holds all the information about the decomposition processes performed during the compression.
