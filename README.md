@@ -683,13 +683,13 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    
    SVD is an exact decomposition, since the matrices it creates are big enough to fully cover the original matrix. SVD is extremely widely used in linear algebra, and specifically in data science, including:
    
-   1) collaborative filtering/recommendations (winning entry for Netflix Prize)
+    1) collaborative filtering/recommendations (winning entry for Netflix Prize)
      
-   2) data compression
+    2) data compression
    
-   3) principal component analysis
+    3) principal component analysis
    
-   4) Latent Semantic Analysis (LSA) 
+    4) Latent Semantic Analysis (LSA) 
    
    For example, A (original Matrix) = U * S * V
                            
@@ -700,8 +700,9 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    V: Right orthogonal matrix, holds important, non-redundant information about observations.
     
    S: Diagonal matrix, holds all the information about the decomposition processes performed during the compression.
+      
    
-   2) NMF (Non-negative Matrix Factorization), rather than constraining our factors to be orthogonal, another idea would to constrain them to be non-negative. NMF is a factorization of a non-negative data set V
+   2. NMF (Non-negative Matrix Factorization), rather than constraining our factors to be orthogonal, another idea would to constrain them to be non-negative. NMF is a factorization of a non-negative data set V
    
    V = W * H, where W and H are non-negative matrices.Often positive factors will be more easily interpretable (and this is the reason behind NMF's popularity).
        
