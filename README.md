@@ -734,15 +734,16 @@ with each epoch is just too large and continous to move further away from its op
    
    * Record a baseline accuracy (classifier) or R2 score (regressor) by passing a validation set or the out-of-bag (OOB) samples through the Algorithm --> Permute the column values of a single predictor feature and then pass all test samples back through the Algorithm and recompute the accuracy or R2 --> The importance of that feature is the difference between the baseline and the drop in overall accuracy or R2 caused by permuting the column. 
    
-       def permutation_importances(rf, X_train, y_train, metric):
-        baseline = metric(rf, X_train, y_train)
-        imp = []
-        for col in X_train.columns:
-            save = X_train[col].copy()
-            X_train[col] = np.random.permutation(X_train[col])
-            m = metric(rf, X_train, y_train)
-            X_train[col] = save
-            imp.append(baseline - m)
-        return np.array(imp)
+           def permutation_importances(rf, X_train, y_train, metric):
+                baseline = metric(rf, X_train, y_train)
+                imp = []
+                for col in X_train.columns:
+                    save = X_train[col].copy()
+                    X_train[col] = np.random.permutation(X_train[col])
+                    m = metric(rf, X_train, y_train)
+                    X_train[col] = save
+                    imp.append(baseline - m)
+                return np.array(imp)
 
-   
+   More about it: https://towardsdatascience.com/be-careful-when-interpreting-your-features-importance-in-xgboost-6e16132588e7
+   https://explained.ai/rf-importance/
