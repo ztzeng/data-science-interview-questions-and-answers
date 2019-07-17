@@ -653,9 +653,9 @@ with each epoch is just too large and continous to move further away from its op
    
 ## 31. Stochastic Gradient Descent
 
-Gradient Descent: For every step we take, we use all the data and all partial derivatives to update the weights
+1. Gradient Descent: For every step we take, we use all the data and all partial derivatives to update the weights
 
-SGD: For every step we take, we randomly choose one sample (or a mini-batch of samples), to this sample to calculate the derivatives.
+2. Stochastic Gradient Descent: For every step we take, we randomly choose one sample (or a mini-batch of samples), to this sample to calculate the derivatives.
 
    It's super userful when large data or redundancies of data. Also, when we have a new data coming in, we only need to take another step for estimation without starting all over.
 
@@ -684,13 +684,13 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    
    SVD is an exact decomposition, since the matrices it creates are big enough to fully cover the original matrix. SVD is extremely widely used in linear algebra, and specifically in data science, including:
    
-    1) collaborative filtering/recommendations (winning entry for Netflix Prize)
+   * collaborative filtering/recommendations (winning entry for Netflix Prize)
      
-    2) data compression
+   * data compression
    
-    3) principal component analysis
+   * principal component analysis
    
-    4) Latent Semantic Analysis (LSA) 
+   * Latent Semantic Analysis (LSA) 
    
    For example, A (original Matrix) = U * S * V
                            
@@ -712,7 +712,7 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    NMF is a non-exact factorization that factors into one skinny positive matrix and one short positive matrix. NMF is NP-hard and non-unique. There are a number of variations on it, created by adding different constraints.
    
 
-## Feature importance
+## 34. Feature importance
    
    Training a model that accurately predicts outcomes is great, but most of the time you don't just need predictions, you want to be able to interpret your model. For example, if you build a model of house prices, knowing which features are most predictive of price tells us which features people are willing to pay for. Feature importance is the most useful interpretation tool, and data scientists regularly examine model parameters (such as the coefficients of linear models), to identify important features.
    
@@ -730,9 +730,9 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    
    3. Proposed metric
    
-   Permutation importance. 
+   * Permutation importance. 
    
-   Record a baseline accuracy (classifier) or R2 score (regressor) by passing a validation set or the out-of-bag (OOB) samples through the Algorithm --> Permute the column values of a single predictor feature and then pass all test samples back through the Algorithm and recompute the accuracy or R2 --> The importance of that feature is the difference between the baseline and the drop in overall accuracy or R2 caused by permuting the column. 
+   * Record a baseline accuracy (classifier) or R2 score (regressor) by passing a validation set or the out-of-bag (OOB) samples through the Algorithm --> Permute the column values of a single predictor feature and then pass all test samples back through the Algorithm and recompute the accuracy or R2 --> The importance of that feature is the difference between the baseline and the drop in overall accuracy or R2 caused by permuting the column. 
    
        def permutation_importances(rf, X_train, y_train, metric):
         baseline = metric(rf, X_train, y_train)
