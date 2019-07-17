@@ -47,6 +47,7 @@
 - [31. Stochastic Gradient Descent](#31-Stochastic-Gradient-Descent)
 - [32. Batch size and Batchnorm](#32-Batch-size-and-Batchnorm)
 - [33. SVD and NMF](#33-SVD-and-NMF)
+- [34. Feature importance](#33-Feature-importance)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -709,4 +710,39 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
        V: Vectorized Images = Facial features  * Importance of features in each image
    
    NMF is a non-exact factorization that factors into one skinny positive matrix and one short positive matrix. NMF is NP-hard and non-unique. There are a number of variations on it, created by adding different constraints.
+   
+
+## Feature importance
+   
+   Training a model that accurately predicts outcomes is great, but most of the time you don't just need predictions, you want to be able to interpret your model. For example, if you build a model of house prices, knowing which features are most predictive of price tells us which features people are willing to pay for. Feature importance is the most useful interpretation tool, and data scientists regularly examine model parameters (such as the coefficients of linear models), to identify important features.
+   
+   1. Random Forest
+   
+   * Default: Mean decrease in impurity (or gini importance) mechanism. The mean decrease in impurity importance of a feature is computed by measuring how effective the feature is at reducing uncertainty (classifiers) or variance (regressors) when creating decision trees within RFs.
+   
+   * Problem: It tends to inflate the importance of continuous or high-cardinality categorical variables.
+   
+   2. XGB
+   
+   * Default: The amount that this attribute is used to split data to improves the performance measure, weighted by the number of observations the node is responsible for. The performance measure may be the purity (Gini index) used to select the split points or another more specific error function.
+   
+   * Other choice: The Gain implies the relative contribution of the corresponding feature to the model calculated by taking each feature’s contribution for each tree in the model. The Coverage metric means the relative number of observations related to this feature. For example, if you have 100 observations, 4 features and 3 trees, and suppose feature1 is used to decide the leaf node for 10, 5, and 2 observations in tree1, tree2 and tree3 respectively; then the metric will count cover for this feature as 10+5+2 = 17 observations. This will be calculated for all the 4 features and the cover will be 17 expressed as a percentage for all features’ cover metrics.
+   
+   3. Proposed metric
+   
+   Permutation importance. 
+   
+   Record a baseline accuracy (classifier) or R2 score (regressor) by passing a validation set or the out-of-bag (OOB) samples through the Algorithm --> Permute the column values of a single predictor feature and then pass all test samples back through the Algorithm and recompute the accuracy or R2 --> The importance of that feature is the difference between the baseline and the drop in overall accuracy or R2 caused by permuting the column. 
+   
+       def permutation_importances(rf, X_train, y_train, metric):
+        baseline = metric(rf, X_train, y_train)
+        imp = []
+        for col in X_train.columns:
+            save = X_train[col].copy()
+            X_train[col] = np.random.permutation(X_train[col])
+            m = metric(rf, X_train, y_train)
+            X_train[col] = save
+            imp.append(baseline - m)
+        return np.array(imp)
+
    
