@@ -46,7 +46,7 @@
 - [30. Vanishing and Exploding gradients](#30-Vanishing-and-Exploding-gradients)
 - [31. Stochastic Gradient Descent](#31-Stochastic-Gradient-Descent)
 - [32. Batch size and Batchnorm](#32-Batch-size-and-Batchnorm)
-- [33. SVD and PCA](#33-SVD-and-PCA)
+- [33. SVD and NMF](#33-SVD-and-NMF)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -677,10 +677,35 @@ SGD: For every step we take, we randomly choose one sample (or a mini-batch of s
    By doing this, we have balanced weigths, not too large or too low; also the training process will be faster.
    
    
-## 33. SVD and PCA
-   SVD (Singular Value Decomposition)is a linear algebra method that decomposes a matrix into 3 resultant matrics to reduce information redundancy and noise. Most commonly used for PCA(Principal Component Analysis).
-   ie, A (original Matrix) = U * S * V
+## 33. SVD and NMF
+   
+   1. SVD (Singular Value Decomposition)is a linear algebra method that decomposes a matrix into 3 resultant matrics to reduce information redundancy and noise. Most commonly used for PCA(Principal Component Analysis).
+   
+   SVD is an exact decomposition, since the matrices it creates are big enough to fully cover the original matrix. SVD is extremely widely used in linear algebra, and specifically in data science, including:
+   
+   1) collaborative filtering/recommendations (winning entry for Netflix Prize)
+     
+   2) data compression
+   
+   3) principal component analysis
+   
+   4) Latent Semantic Analysis (LSA) 
+   
+   For example, A (original Matrix) = U * S * V
+                           
+       Words as row, hashtages as columns co-occurence matrix = Embedding of hashtages by words they occur with * S * Embedding of words by hashtages they occur with
    
    U: Left orthogonal matrix, holds important, non-redundant information about observations.
+    
    V: Right orthogonal matrix, holds important, non-redundant information about observations.
+    
    S: Diagonal matrix, holds all the information about the decomposition processes performed during the compression.
+   
+   2) NMF (Non-negative Matrix Factorization), rather than constraining our factors to be orthogonal, another idea would to constrain them to be non-negative. NMF is a factorization of a non-negative data set V
+   
+   V = W * H, where W and H are non-negative matrices.Often positive factors will be more easily interpretable (and this is the reason behind NMF's popularity).
+       
+       V: Vectorized Images = Facial features  * Importance of features in each image
+   
+   NMF is a non-exact factorization that factors into one skinny positive matrix and one short positive matrix. NMF is NP-hard and non-unique. There are a number of variations on it, created by adding different constraints.
+   
