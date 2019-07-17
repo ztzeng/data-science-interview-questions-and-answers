@@ -47,7 +47,7 @@
 - [31. Stochastic Gradient Descent](#31-Stochastic-Gradient-Descent)
 - [32. Batch size and Batchnorm](#32-Batch-size-and-Batchnorm)
 - [33. SVD and NMF](#33-SVD-and-NMF)
-- [34. Feature importance](#33-Feature-importance)
+- [34. Feature importance](#34-Feature-importance)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
