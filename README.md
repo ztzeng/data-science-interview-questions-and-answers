@@ -418,6 +418,11 @@ In other words, Kmeans calculate distance, while GM calculates “weighted” di
 
 ## 23. Describe how Gradient Boosting works
 
+Bagging VS Boosting
+
+![alt text](images/Bagging_Boosting.jpg)
+
+
 The idea of boosting came out of the idea of combine weak learner (like decision dumps).
 
 To begin with, gradient boosting is an ensembling technique, which means that prediction is done by an ensemble of simpler estimators. While this theoretical framework makes it possible to create an ensemble of various estimators, in practice we almost always use GBDT — gradient boosting over decision trees. 
