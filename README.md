@@ -48,6 +48,7 @@
 - [32. Batch size and Batchnorm](#32-Batch-size-and-Batchnorm)
 - [33. SVD and NMF](#33-SVD-and-NMF)
 - [34. Feature importance](#34-Feature-importance)
+- [35. Distance metrics and similarity](#35-Distance-metrics-and-similarity)
 
 ## 1. Why do you use feature selection?
 Feature selection is the process of selecting a subset of relevant features for use in model construction. Feature selection is itself useful, but it mostly acts as a filter, muting out features that aren’t useful in addition to your existing features.
@@ -747,3 +748,28 @@ with each epoch is just too large and continous to move further away from its op
 
    More about it: https://towardsdatascience.com/be-careful-when-interpreting-your-features-importance-in-xgboost-6e16132588e7
    https://explained.ai/rf-importance/
+   
+## 35. Distance metrics and similarity
+
+   1. P-norm distance: Mahattan distance, Euclidean distance, Chebyshev distance. 
+   
+      Mahanttan distance: |A1 - B1| + |A2 - B2| + .....+ |An - Bn|
+      
+      Euclidean distance: Sqrt((A1 - B1)^2 + (A2 - B2)^2 +.....)
+      
+      Chebyshev distance: Max(|A1 - B2| , |A2 - B2|)
+      
+      
+   2. Jaccard Similarity = size(A intercept B) / size( A and B)
+      
+      When we only care about userA and userB purchase matrix, Jaccard makes sense. But if we care about specific ratings, Jaccard loss this numeric information.
+      
+   3. Cosine Similarity = sum(Ai * Bi) / (sqrt(sum(Ai^2)+sum(Bi^2)))
+      
+      When 2 vectors have same orientation, then cos(.) = 1. It's commonly used in high-dementional positive spaces, like how document are alike.
+      
+   4. Pearson Coreeelation Coefficient = 
+   ![alt text](images/pearson.jpg)
+   
+       It mearusres the linear dependence, with consideration of mean_A and mean_B. (like 2 users have different rating basis, normalize score_A and score_b can be achived)
+   
