@@ -769,7 +769,7 @@ with each epoch is just too large and continous to move further away from its op
       When 2 vectors have same orientation, then cos(.) = 1. It's commonly used in high-dementional positive spaces, like how document are alike.
       
    4. Pearson Coreeelation Coefficient = 
-   ![alt text](images/pearson.jpg)
+   ![alt text](images/pea.jpg)
    
        It mearusres the linear dependence, with consideration of mean_A and mean_B. (like 2 users have different rating basis, normalize score_A and score_b can be achived)
    
