@@ -764,7 +764,8 @@ with each epoch is just too large and continous to move further away from its op
       
       When we only care about userA and userB purchase matrix, Jaccard makes sense. But if we care about specific ratings, Jaccard loss this numeric information.
       
-   3. Cosine Similarity = sum(Ai * Bi) / (sqrt(sum(Ai^2)+sum(Bi^2)))
+   3. Cosine Similarity = 
+   ![alt text](images/cos.jpg)
       
       When 2 vectors have same orientation, then cos(.) = 1. It's commonly used in high-dementional positive spaces, like how document are alike.
       
